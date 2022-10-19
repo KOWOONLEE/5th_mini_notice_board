@@ -18,7 +18,7 @@ const Nav = () => {
       <button onClick={handleToggle}>
         <BsList />
       </button>
-      <ul className={isActive ? "active" : "nonActive"}>
+      <ul className={isActive ? "nonActive" : "active"}>
         <li>
           <a href="/" className="item">
             <BsFillPersonFill />

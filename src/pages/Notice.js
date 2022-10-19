@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "../components/Modal.js";
+import moment from "moment";
 
 const Notice = () => {
   const [contents, setContents] = useState([]);
-  const [date, setDate] = useState(0);
+  const [count, setCount] = useState(3);
+  const today = new Date();
   const [noticeContent, setNoticeContent] = useState({
-    no: date + 1,
+    no: count + 1,
     title: "",
     content: "",
-    time: "2022-10-19",
+    time: moment(today).format("YYYY-MM-DD"),
   });
+
+  console.log(contents);
 
   useEffect(() => {
     fetch("/data/notice.json")
@@ -24,7 +28,6 @@ const Notice = () => {
       ...noticeContent,
       [name]: value,
     });
-    console.log(noticeContent);
   };
 
   const clickSubmit = (e) => {
@@ -51,7 +54,7 @@ const Notice = () => {
                 <td>{item.no}</td>
                 <td>{item.title}</td>
                 <td>{item.content}</td>
-                <td>{item.time}</td>
+                <td>{moment(item.time).format("YYYY-MM-DD")}</td>
               </tr>
             ))}
           </tbody>
@@ -134,6 +137,7 @@ const NoticeWrapper = styled.div`
       }
       .editForm {
         display: inline-block;
+        margin-left: 10px;
 
         div {
           margin-bottom: 15px;
@@ -158,7 +162,7 @@ const NoticeWrapper = styled.div`
 
   thead {
     width: 76vw;
-    height: 7vh;
+    height: 6vh;
     font-size: 1.3em;
     font-weight: bold;
     border: 1px solid gray;
@@ -167,7 +171,7 @@ const NoticeWrapper = styled.div`
     justify-content: center;
 
     tr {
-      height: 10vh;
+      height: 6vh;
     }
 
     th {
