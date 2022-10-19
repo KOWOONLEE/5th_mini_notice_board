@@ -22,7 +22,7 @@ const Nav = () => {
         <li>
           <a href="/" className="item">
             <BsFillPersonFill />
-            <span>user1</span>
+            <span>USER1</span>
           </a>
         </li>
         <li>
@@ -81,6 +81,7 @@ const HeaderWrapper = styled.div`
   li {
     height: 10vh;
     margin-top: 20px;
+    padding-left: 10px;
   }
 
   .active {

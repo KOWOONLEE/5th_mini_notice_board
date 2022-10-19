@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Modal from "../components/Modal.js";
 import moment from "moment";
+import theme from "../theme";
 
 const Notice = () => {
   const [contents, setContents] = useState([]);
@@ -127,11 +127,10 @@ const NoticeWrapper = styled.div`
       width: 76vw;
       height: 24vh;
       top: 350px;
-      border: 1px solid gray;
       padding-left: 10px;
 
       h1 {
-        font-size: 1.2em;
+        font-size: 1.5em;
         font-weight: bold;
         margin: 5px 0px 20px 0px;
       }
@@ -155,6 +154,11 @@ const NoticeWrapper = styled.div`
         button {
           width: 8vw;
           height: 5vh;
+          color: white;
+          background-color: ${theme.mainColor};
+          font-size: 1em;
+          border: none;
+          border-radius: 10px;
         }
       }
     }
@@ -163,9 +167,10 @@ const NoticeWrapper = styled.div`
   thead {
     width: 76vw;
     height: 6vh;
+    color: black;
+    background: white;
     font-size: 1.3em;
-    font-weight: bold;
-    border: 1px solid gray;
+    border-bottom: 1px double black;
     text-align: center;
     align-items: center;
     justify-content: center;

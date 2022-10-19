@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Chart as ChartJS, BarElement } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-import moment from "moment";
 // import { faker } from "@faker-js/faker";
 
 Chart.register(...registerables);
@@ -40,7 +39,7 @@ const Main = () => {
         //   faker.datatype.number({ min: 0, max: 100 })
         // ),
         data: [2, 1],
-        backgroundColor: ["rgb(193, 212, 240, 0.3)"],
+        backgroundColor: ["rgb(67,196,216, 0.3)"],
         borderColor: ["rgb(193, 212, 240)"],
         borderWidth: 1,
       },
@@ -60,7 +59,7 @@ const Main = () => {
     <MainWrapper>
       <h1>Main Page</h1>
       <div className="chart">
-        <Bar data={data} width={500} height={300} options={options} />
+        <Bar data={data} width={600} height={350} options={options} />
       </div>
     </MainWrapper>
   );
@@ -88,6 +87,6 @@ const MainWrapper = styled.div`
     width: 200vw;
     left: 17vw;
     top: 150px;
-    margin-left: 22vw;
+    margin-left: 15vw;
   }
 `;
