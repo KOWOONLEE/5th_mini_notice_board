@@ -1,0 +1,22 @@
+{
+  "notices": [
+    {
+      "no": 1,
+      "title": "제목1",
+      "author": "user1",
+      "time": "1시간전"
+    },
+    {
+      "no": 2,
+      "title": "제목2",
+      "author": "user2",
+      "time": "22.08.30"
+    },
+    {
+      "no": 3,
+      "title": "제목3",
+      "author": "user3",
+      "time": "22.03.20"
+    }
+  ]
+}

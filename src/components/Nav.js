@@ -20,13 +20,13 @@ const Nav = () => {
       </button>
       <ul className={isActive ? "active" : "nonActive"}>
         <li>
-          <a href="#" className="item">
+          <a href="/" className="item">
             <BsFillPersonFill />
             <span>user1</span>
           </a>
         </li>
         <li>
-          <a href="#" className="item">
+          <a href="/notice" className="item">
             <BsClipboard />
             <span>게시판</span>
           </a>
@@ -91,6 +91,7 @@ const HeaderWrapper = styled.div`
     }
   }
   .nonActive {
+    position: fixed;
     width: 12vw;
     transition: width 1s;
   }
