@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Chart as ChartJS, BarElement } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-// import { faker } from "@faker-js/faker";
 
 Chart.register(...registerables);
 ChartJS.register(BarElement);
@@ -17,27 +16,12 @@ const Main = () => {
       .then((data) => setContents(data.notices));
   }, []);
 
-  // const getCount = () => {
-  //   const month = contents.map((date) => moment(date.time).format("MM"));
-  //   const monthdata = new Array(11).fill(0);
-  //   month.map((item) => {
-  //     monthdata[Number(item) - 1]++;
-  //   });
-  //   console.log(monthdata);
-  //   return monthdata;
-  // };
-
   const monthLabels = ["8월", "9월"];
   const data = {
     labels: monthLabels,
     datasets: [
       {
         label: "notice",
-        // data: [0, 1, 2, 3],
-        // data: contents.map((date) => moment(date.time).format("MM")),
-        // data: monthLabels.map(() =>
-        //   faker.datatype.number({ min: 0, max: 100 })
-        // ),
         data: [2, 1],
         backgroundColor: ["rgb(67,196,216, 0.3)"],
         borderColor: ["rgb(193, 212, 240)"],
