@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import Modal from "../components/Modal.js";
 
 const Notice = () => {
   const [contents, setContents] = useState([]);
+  const [editModal, setEditModal] = useState(false);
+  const [titleText, setTitleText] = useState("");
+  const [contentText, setContentText] = useState("");
+
+  const clickModal = () => {
+    setEditModal(!editModal);
+  };
 
   useEffect(() => {
     fetch("/data/notice.json")
@@ -13,6 +21,17 @@ const Notice = () => {
   return (
     <NoticeWrapper>
       <div className="header">게시판</div>
+      <button onClick={clickModal} className="edit">
+        글쓰기
+      </button>
+      {editModal && (
+        <Modal
+          titleText={titleText}
+          setTitleText={setTitleText}
+          contentText={contentText}
+          setContentText={setContentText}
+        ></Modal>
+      )}
       <div className="table">
         <table>
           <thead>
@@ -25,7 +44,7 @@ const Notice = () => {
           </thead>
           <tbody>
             {contents.map((item) => (
-              <tr value={item.no} key={item.id}>
+              <tr value={item.no} key={item.no}>
                 <td>{item.no}</td>
                 <td>{item.title}</td>
                 <td>{item.author}</td>
@@ -45,14 +64,22 @@ const NoticeWrapper = styled.div`
   position: fixed;
   width: 76vw;
   left: 17vw;
-  top: 65px;
+  top: 70px;
+  justify-content: space-between;
 
   .header {
     display: flex;
-    font-size: 1.8em;
+    font-size: 1.6em;
     font-weight: bold;
     height: 7vh;
     align-items: center;
+  }
+  .edit {
+    width: 10vw;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
   }
 
   .table {
