@@ -18,15 +18,15 @@ const Nav = () => {
       <button onClick={handleToggle}>
         <BsList />
       </button>
-      <ul className={isActive ? "active" : "nonActive"}>
+      <ul className={isActive ? "nonActive" : "active"}>
         <li>
-          <a href="#" className="item">
+          <a href="/" className="item">
             <BsFillPersonFill />
-            <span>user1</span>
+            <span>USER1</span>
           </a>
         </li>
         <li>
-          <a href="#" className="item">
+          <a href="/notice" className="item">
             <BsClipboard />
             <span>게시판</span>
           </a>
@@ -81,6 +81,7 @@ const HeaderWrapper = styled.div`
   li {
     height: 10vh;
     margin-top: 20px;
+    padding-left: 10px;
   }
 
   .active {
@@ -91,6 +92,7 @@ const HeaderWrapper = styled.div`
     }
   }
   .nonActive {
+    position: fixed;
     width: 12vw;
     transition: width 1s;
   }
