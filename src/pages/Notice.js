@@ -5,8 +5,17 @@ import Modal from "../components/Modal.js";
 const Notice = () => {
   const [contents, setContents] = useState([]);
   const [editModal, setEditModal] = useState(false);
-  const [titleText, setTitleText] = useState("");
-  const [contentText, setContentText] = useState("");
+  const [date, setDate] = useState(0);
+  // const [titleText, setTitleText] = useState("");
+  // const [contentText, setContentText] = useState("");
+  const [noticeContent, setNoticeContent] = useState({
+    no: date + 1,
+    title: "",
+    content: "",
+    time: "2022-10-19",
+  });
+
+  console.log(contents);
 
   const clickModal = () => {
     setEditModal(!editModal);
@@ -18,6 +27,21 @@ const Notice = () => {
       .then((data) => setContents(data.notices));
   }, []);
 
+  const getValue = (e) => {
+    const { name, value } = e.target;
+    setNoticeContent({
+      ...noticeContent,
+      [name]: value,
+    });
+    console.log(noticeContent);
+  };
+
+  const clickSubmit = (e) => {
+    e.preventDefault();
+    setContents(contents.concat({ ...noticeContent }));
+  };
+
+  console.log(contents);
   return (
     <NoticeWrapper>
       <div className="header">게시판</div>
@@ -26,10 +50,10 @@ const Notice = () => {
       </button>
       {editModal && (
         <Modal
-          titleText={titleText}
-          setTitleText={setTitleText}
-          contentText={contentText}
-          setContentText={setContentText}
+          contents={contents}
+          setContents={setContents}
+          noticeContent={noticeContent}
+          setNoticeContent={setNoticeContent}
         ></Modal>
       )}
       <div className="table">
@@ -38,21 +62,49 @@ const Notice = () => {
             <tr>
               <th className="number">No</th>
               <th className="title">제목</th>
-              <th className="author">작성자</th>
+              <th className="author">내용</th>
               <th className="time">작성시간</th>
             </tr>
           </thead>
           <tbody>
             {contents.map((item) => (
-              <tr value={item.no} key={item.no}>
+              <tr value={item.no} key={item.title}>
                 <td>{item.no}</td>
                 <td>{item.title}</td>
-                <td>{item.author}</td>
+                <td>{item.content}</td>
                 <td>{item.time}</td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div className="editContainer">
+          <p>글쓰기</p>
+          <div className="modalContainer">
+            <h1>글쓰기</h1>
+            <div className="editContainer">
+              <form>
+                <h2>제목</h2>
+                <input
+                  name="title"
+                  onChange={getValue}
+                  className="titleInput"
+                  placeholder="제목을 입력해주세요"
+                ></input>
+                <p>오늘 날짜</p>
+                <h2>내용</h2>
+                <input
+                  name="content"
+                  onChange={getValue}
+                  className="contentInput"
+                  placeholder="내용을 입력해주세요"
+                ></input>
+                <button onClick={clickSubmit} className="saveBtn">
+                  저장하기
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </NoticeWrapper>
   );
@@ -88,6 +140,15 @@ const NoticeWrapper = styled.div`
     width: 76vw;
     height: 66vh;
     border: 1px solid gray;
+
+    .editContainer {
+      display: flex;
+      position: fixed;
+      width: 76vw;
+      height: 20vh;
+      top: 300px;
+      border: 1px solid gray;
+    }
   }
 
   thead {

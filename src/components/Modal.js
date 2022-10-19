@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const Modal = ({ titleText, setTitleText, contentText, setContentText }) => {
-  const handleTitle = (e) => {
-    setTitleText(e.target.value);
+const Modal = ({ noticeContent, setNoticeContent, contents, setContents }) => {
+  const getValue = (e) => {
+    const { name, value } = e.target;
+    setNoticeContent({
+      ...noticeContent,
+      [name]: value,
+    });
+    console.log(noticeContent);
   };
 
-  const handleContent = (e) => {
-    setContentText(e.target.value);
+  const clickSubmit = (e) => {
+    // e.preventDefault();
+    setContents(contents.concat({ ...noticeContent }));
   };
 
-  const clickButton = (e) => {
-    e.preventDefault();
-    handleTitle();
-    handleContent();
-  };
-
+  console.log(contents);
   return (
     <ModalWrapper>
       <div className="modalContainer">
@@ -24,20 +25,20 @@ const Modal = ({ titleText, setTitleText, contentText, setContentText }) => {
           <form>
             <h2>제목</h2>
             <input
-              onChange={handleTitle}
-              value={titleText}
+              name="title"
+              onChange={getValue}
               className="titleInput"
               placeholder="제목을 입력해주세요"
             ></input>
             <p>오늘 날짜</p>
             <h2>내용</h2>
             <input
-              onChange={handleContent}
-              value={contentText}
+              name="content"
+              onChange={getValue}
               className="contentInput"
               placeholder="내용을 입력해주세요"
             ></input>
-            <button onClick={clickButton} className="saveBtn">
+            <button onClick={clickSubmit} className="saveBtn">
               저장하기
             </button>
           </form>
@@ -47,6 +48,7 @@ const Modal = ({ titleText, setTitleText, contentText, setContentText }) => {
   );
 };
 export default Modal;
+
 const ModalWrapper = styled.div`
   width: 100%;
   height: 100vh;
