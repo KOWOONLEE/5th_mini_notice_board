@@ -1,7 +1,7 @@
 # **프로젝트 소개 - 게시판 만들기**
 
 ## 배포 주소
-### 📒 
+### 📒 https://tiny-marshmallow-c09af7.netlify.app/notice
 
 <br>
 <br>
