@@ -4,22 +4,13 @@ import Modal from "../components/Modal.js";
 
 const Notice = () => {
   const [contents, setContents] = useState([]);
-  const [editModal, setEditModal] = useState(false);
   const [date, setDate] = useState(0);
-  // const [titleText, setTitleText] = useState("");
-  // const [contentText, setContentText] = useState("");
   const [noticeContent, setNoticeContent] = useState({
     no: date + 1,
     title: "",
     content: "",
     time: "2022-10-19",
   });
-
-  console.log(contents);
-
-  const clickModal = () => {
-    setEditModal(!editModal);
-  };
 
   useEffect(() => {
     fetch("/data/notice.json")
@@ -41,28 +32,16 @@ const Notice = () => {
     setContents(contents.concat({ ...noticeContent }));
   };
 
-  console.log(contents);
   return (
     <NoticeWrapper>
       <div className="header">게시판</div>
-      <button onClick={clickModal} className="edit">
-        글쓰기
-      </button>
-      {editModal && (
-        <Modal
-          contents={contents}
-          setContents={setContents}
-          noticeContent={noticeContent}
-          setNoticeContent={setNoticeContent}
-        ></Modal>
-      )}
       <div className="table">
         <table>
           <thead>
             <tr>
               <th className="number">No</th>
               <th className="title">제목</th>
-              <th className="author">내용</th>
+              <th className="content">내용</th>
               <th className="time">작성시간</th>
             </tr>
           </thead>
@@ -78,32 +57,30 @@ const Notice = () => {
           </tbody>
         </table>
         <div className="editContainer">
-          <p>글쓰기</p>
-          <div className="modalContainer">
-            <h1>글쓰기</h1>
-            <div className="editContainer">
-              <form>
-                <h2>제목</h2>
-                <input
-                  name="title"
-                  onChange={getValue}
-                  className="titleInput"
-                  placeholder="제목을 입력해주세요"
-                ></input>
-                <p>오늘 날짜</p>
-                <h2>내용</h2>
-                <input
-                  name="content"
-                  onChange={getValue}
-                  className="contentInput"
-                  placeholder="내용을 입력해주세요"
-                ></input>
-                <button onClick={clickSubmit} className="saveBtn">
-                  저장하기
-                </button>
-              </form>
+          <h1>글쓰기</h1>
+          <form className="editForm">
+            <div>
+              <h2>제목</h2>
+              <input
+                name="title"
+                onChange={getValue}
+                className="titleInput"
+                placeholder="제목을 입력해주세요"
+              ></input>
             </div>
-          </div>
+            <div>
+              <h2>내용</h2>
+              <input
+                name="content"
+                onChange={getValue}
+                className="contentInput"
+                placeholder="한줄평을 입력해주세요"
+              ></input>
+              <button onClick={clickSubmit} className="saveBtn">
+                입력하기
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </NoticeWrapper>
@@ -142,12 +119,40 @@ const NoticeWrapper = styled.div`
     border: 1px solid gray;
 
     .editContainer {
-      display: flex;
+      display: inline-block;
       position: fixed;
       width: 76vw;
-      height: 20vh;
-      top: 300px;
+      height: 24vh;
+      top: 350px;
       border: 1px solid gray;
+      padding-left: 10px;
+
+      h1 {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin: 5px 0px 20px 0px;
+      }
+      .editForm {
+        display: inline-block;
+
+        div {
+          margin-bottom: 15px;
+        }
+
+        h2 {
+          display: inline-block;
+          margin-right: 20px;
+        }
+        input {
+          width: 40vw;
+          height: 5vh;
+          margin-right: 20px;
+        }
+        button {
+          width: 8vw;
+          height: 5vh;
+        }
+      }
     }
   }
 
@@ -173,10 +178,10 @@ const NoticeWrapper = styled.div`
       width: 6vw;
     }
     .title {
-      width: 35vw;
+      width: 21vw;
     }
-    .author {
-      width: 16vw;
+    .content {
+      width: 30vw;
     }
     .time {
       width: 19vw;
